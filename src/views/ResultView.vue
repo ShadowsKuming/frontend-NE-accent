@@ -3,7 +3,7 @@
     <div class = "result-frame">
 
       <div class = "congratulation-symbol">
-        <img src="@/assets/c3e97fedc5fde9af581238c9993a7d9.png" alt="">
+        <img src="../assets/WiningCup.png" alt="">
         <p class = "congratulations">Congratulations</p>
         <p class = "congratulations-word">You’ve Completed the Challenge!</p>
         <p class = "performance-word">Let’s see how you performed in the game</p>
@@ -81,7 +81,7 @@ export default {
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-image: url("@/assets/image 6.png");
+  background-image: url("@/assets/BackgroundImage 2.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

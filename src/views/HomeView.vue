@@ -3,9 +3,9 @@
     <!-- Main content section with images -->
     <div class="content">
       <!-- Title image -->
-      <img id="start-page-title-font" src="../assets/HomeView/start-page-title-font.gif" alt="">
+      <img id="start-page-title-font" src="../assets/start-page-title-font.gif" alt="">
       <!-- Button image which opens the dialog -->
-      <img id="start-page-title-button" src="../assets/HomeView/start-page-title-button.png" alt="" @click="dialogVisible = true">
+      <img id="start-page-title-button" src="../assets/start-page-title-button.png" alt="" @click="dialogVisible = true">
     </div>
 
     <!-- Dialog content -->
@@ -71,7 +71,7 @@ export default {
 /* Main container for the start page */
 .start-page {
   position: relative;
-  background-image: url("@/assets/bg 1.png");
+  background-image: url("@/assets/BackgroundImage 1.png");
   background-size: cover;
   //background: linear-gradient(to bottom, #4cc1f1, #1b88e5);
   height: 100vh;

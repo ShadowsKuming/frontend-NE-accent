@@ -396,7 +396,7 @@ export default {
 <style>
 .information-page {
   position: relative;
-  background-image: url("@/assets/bg 1.png");
+  background-image: url("@/assets/BackgroundImage 1.png");
   background-size: 100vw 100vh;
   height: 100vh;
   width: 100vw;
