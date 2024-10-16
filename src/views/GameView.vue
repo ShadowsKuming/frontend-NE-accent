@@ -60,16 +60,17 @@
         <i class="el-icon-close" id = "wrong2" style="font-size: 180px"></i>
       </div>
 
-      <el-dialog
-          title="Congratulations!!"
-          :visible.sync="dialogVisible"
-          width="30%"
-          center>
-        <span style="font-size: 20px">You have already finished the County level game. Let's increase the difficulty a bit—can you distinguish accents at the borough level?</span>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="dialogVisible = false">Go to the County Level!</el-button>
-        </span>
-      </el-dialog>
+      <div v-if="dialogVisible" class="custom-dialog-overlay">
+        <div class="custom-dialog">
+          <h3 class="custom-dialog-title">Congratulations!!</h3>
+          <p class="custom-dialog-content">
+            You have already finished the County level game. Let's increase the difficulty a bit—can you distinguish accents at the borough level?
+          </p>
+          <div class="custom-dialog-footer">
+            <button @click="dialogVisible = false" class="custom-dialog-button">Go to the County Level!</button>
+          </div>
+        </div>
+      </div>
 
     </div>
 
@@ -100,7 +101,7 @@ export default {
       },
       audioPlaying: false,
       answerClickable: false,
-      dialogVisible: false,
+      dialogVisible: true,
     };
   },
   created() {
@@ -217,6 +218,63 @@ export default {
 
 
 <style scoped>
+
+/* Fullscreen overlay to make the background darker */
+.custom-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Custom dialog box */
+.custom-dialog {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease;
+  max-width: 800px;
+  width: 30%; /* Default width for landscape orientation */
+  text-align: center;
+}
+
+/* Title styling */
+.custom-dialog-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Content styling */
+.custom-dialog-content {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+/* Footer with button */
+.custom-dialog-footer {
+  text-align: center;
+}
+
+.custom-dialog-button {
+  padding: 10px 20px;
+  background-color: #409eff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.custom-dialog-button:hover {
+  background-color: #66b1ff;
+}
 
 @media (orientation: portrait) {
   #county-level{
@@ -407,6 +465,10 @@ export default {
     display: none;
     color: #ff4050;
   }
+  .custom-dialog {
+    width: 80%; /* 80% width in portrait orientation */
+  }
+
 
 
 }
