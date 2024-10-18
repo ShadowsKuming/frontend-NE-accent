@@ -5,15 +5,19 @@
       <div id = 'tyne_and_wear' @click = 'selectAnswer($event)' @mouseover = 'colourChange($event)' @mouseout='colourResume($event)'>Tyne and Wear</div>
       <div id = 'northumberland' @click = 'selectAnswer($event)' @mouseover = 'colourChange($event)' @mouseout='colourResume($event)'>Northumberland</div>
 
-      <el-button type="primary" circle plain class="audio" :disabled="audioPlaying" @click="playAudio">
-        <i class="el-icon-video-play" style="font-size: 50px;" ></i>
-      </el-button>
+<!--      <el-button type="primary" circle plain class="audio" :disabled="audioPlaying" @click="playAudio">-->
+<!--        <i class="el-icon-video-play" style="font-size: 50px;" ></i>-->
+<!--      </el-button>-->
+      <div class="play-button" v-if="!audioPlaying" ref="playButton" @click="playAudio">
+        Wey Aye!
+      </div>
+
       <audio ref="audioPlayer" ></audio>
 
-      <div class="scores-display">
-        <div> Your Scores </div>
-        <div id = 'scores-you-get'> {{currentQuestion.score}} </div>
-      </div>
+<!--      <div class="scores-display">-->
+<!--        <div> Your Scores </div>-->
+<!--        <div id = 'scores-you-get'> {{currentQuestion.score}} </div>-->
+<!--      </div>-->
 
       <!-- Progress Bar with Percentage -->
       <div class="progress-container">
@@ -38,15 +42,18 @@
       <div id = 'north_tyneside' @click = 'selectAnswer($event)' @mouseover = 'colourChange($event)' @mouseout='colourResume($event)'>North Tyneside</div>
       <div id = 'south_tyneside' @click = 'selectAnswer($event)' @mouseover = 'colourChange($event)' @mouseout='colourResume($event)'>South Tyneside</div>
 
-      <el-button type="primary" circle plain class="audio" :disabled="audioPlaying" @click="playAudio">
-        <i class="el-icon-video-play" style="font-size: 50px;" ></i>
-      </el-button>
+<!--      <el-button type="primary" circle plain class="audio" :disabled="audioPlaying" @click="playAudio">-->
+<!--        <i class="el-icon-video-play" style="font-size: 50px;" ></i>-->
+<!--      </el-button>-->
+      <div class="play-button" v-if="!audioPlaying" ref="playButton" @click="playAudio">
+        Wey Aye!
+      </div>
       <audio ref="audioPlayer" ></audio>
 
-      <div class="scores-display">
-        <div> Your Scores </div>
-        <div id = 'scores-you-get'> {{currentQuestion.score}} </div>
-      </div>
+<!--      <div class="scores-display">-->
+<!--        <div> Your Scores </div>-->
+<!--        <div id = 'scores-you-get'> {{currentQuestion.score}} </div>-->
+<!--      </div>-->
 
       <!-- Progress Bar with Percentage -->
       <div class="progress-container">
@@ -62,12 +69,14 @@
 
       <div v-if="dialogVisible" class="custom-dialog-overlay">
         <div class="custom-dialog">
-          <h3 class="custom-dialog-title">Congratulations!!</h3>
-          <p class="custom-dialog-content">
-            You have already finished the County level game. Let's increase the difficulty a bit—can you distinguish accents at the borough level?
-          </p>
+          <h3 class="custom-dialog-title">Level Up! 🎉</h3>
+          <p><strong>You’ve conquered the County level!</strong></p>
+          <p>Now, brace yourself for a tougher challenge!</p>
+          <p>Can you master the borough accents? </p>
+          <p>Let’s find out!</p>
+
           <div class="custom-dialog-footer">
-            <button @click="dialogVisible = false" class="custom-dialog-button">Go to the County Level!</button>
+            <button @click="dialogVisible = false" class="custom-dialog-button">Go to the Borough Level!</button>
           </div>
         </div>
       </div>
@@ -112,7 +121,7 @@ export default {
       if(this.answerClickable){
         const element = event.target;
         element.style.cursor = "pointer";
-        element.style.color = "blue";
+        element.style.color = "#CADB2F";
       }else{
         const element = event.target;
         element.style.cursor = "not-allowed";
@@ -194,7 +203,8 @@ export default {
     playAudio(){
       request.get("/game/playAudio", { params: { id: this.client_id } }).then(res => {
         if (res.code === '0') {
-          const audioUrl = `http://localhost:8081${res.data}`;  //
+          const audioUrl = `http://localhost:8081${res.data}`;
+          // 音频播放时长
           this.$refs.audioPlayer.src = audioUrl;
           this.$refs.audioPlayer.play();
         } else {
@@ -219,6 +229,44 @@ export default {
 
 <style scoped>
 
+div {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.play-button {
+  width: 20vw; /* Width relative to the viewport width */
+  height: 20vw; /* Height relative to the viewport width */
+  max-width: 150px; /* Maximum width */
+  max-height: 150px; /* Maximum height */
+  border-radius: 20px; /* Rounded corners */
+  background-color: #00A58E; /* Button color */
+  color: white; /* Text color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3.5vw; /* Font size relative to viewport width */
+  cursor: pointer;
+  position: absolute; /* Adjust position as needed */
+  right: 5%; /* Position it appropriately */
+  top: 5%; /* Position it appropriately */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+  padding: 30px;
+}
+
+.play-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.play-button:active {
+  transform: translateY(1px); /* Slight press effect */
+}
+
+.play-button:focus {
+  outline: none; /* Remove outline */
+}
+
 /* Fullscreen overlay to make the background darker */
 .custom-dialog-overlay {
   position: fixed;
@@ -231,6 +279,8 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  //background-image: url('@/assets/BackgroundImage 3.png');
+  animation: fadeIn 0.5s;
 }
 
 /* Custom dialog box */
@@ -437,7 +487,7 @@ export default {
     top:30%;
     transform: translate(12%,0%);
     display: none;
-    color: #46ff40;
+    color: #88CDEE;
   }
   #wrong{
     position: absolute;
@@ -445,7 +495,7 @@ export default {
     top:30%;
     transform: translate(12%,0%);
     display: none;
-    color: #ff4050;
+    color: #88CDEE;
   }
 
   #right2{
@@ -455,7 +505,7 @@ export default {
     top:30%;
     transform: translate(12%,0%);
     display: none;
-    color: #46ff40;
+    color: #88CDEE;
   }
   #wrong2{
     position: absolute;
@@ -463,7 +513,7 @@ export default {
     top:30%;
     transform: translate(12%,0%);
     display: none;
-    color: #ff4050;
+    color: #88CDEE;
   }
   .custom-dialog {
     width: 80%; /* 80% width in portrait orientation */
@@ -633,7 +683,7 @@ export default {
     top:60%;
     transform: translate(25%,0%);
     display: none;
-    color: #46ff40;
+    color: #88CDEE;
   }
   #wrong{
     position: absolute;
@@ -641,7 +691,7 @@ export default {
     top:60%;
     transform: translate(25%,0%);
     display: none;
-    color: #ff4050;
+    color: #88CDEE;
   }
 
   #right2{
@@ -650,7 +700,7 @@ export default {
     top:60%;
     transform: translate(25%,0%);
     display: none;
-    color: #46ff40;
+    color: #88CDEE;
   }
   #wrong2{
     position: absolute;
@@ -658,7 +708,7 @@ export default {
     top:60%;
     transform: translate(25%,0%);
     display: none;
-    color: #ff4050;
+    color: #88CDEE;
   }
 }
 

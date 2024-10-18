@@ -17,7 +17,7 @@
           <p>Your Rank</p>
           <div class= "data-frame">{{rank}}/{{total}}</div>
 
-          <a href="#" class="rank-link">View Detailed Results <i class ="el-icon-arrow-right"></i></a>
+          <a href="#" class="rank-link" @click="viewRanking">View Detailed Results <i class ="el-icon-arrow-right"></i></a>
         </div>
         <div class = "accuracy-symbol">
           <p>Accuracy</p>
@@ -126,6 +126,7 @@ export default {
   font-weight: 700;
   line-height: 38px; /* 131.034% */
   margin: 0;
+  text-align: center;
 }
 
 .performance-word{
@@ -262,7 +263,7 @@ export default {
     justify-content: center;
     align-items: center;
 
-    transform: scale(0.6);  /* Reset scaling for mobile */
+    transform: scale(0.48);  /* Reset scaling for mobile */
     transform-origin: center;
   }
 }
