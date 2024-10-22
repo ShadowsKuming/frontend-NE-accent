@@ -61,27 +61,48 @@
           <el-form-item label="Postcode" prop="postcode">
             <el-input v-model="form.postcode" placeholder="Postcode"></el-input>
           </el-form-item>
-          <el-form-item label="Address" prop="current_address">
-            <el-input v-model="form.current_address" placeholder="Current Address"></el-input>
+
+          <el-form-item label="Current Address" prop="current_address">
+            <el-cascader
+                :options="addressOptions"
+                placeholder="Select your current address"
+                @change="handleAddressChange('current_address', $event)"
+                clearable>
+            </el-cascader>
           </el-form-item>
+
         </el-form>
       </div>
 
-      <!-- Page 4: Childhood and Long-term Residence -->
-      <div v-else-if="page === 4" class="long-child-address">
+      <!-- Page 4: Child & Long-term Address -->
+      <div v-else-if="page === 4" class="address-page">
         <div class="information-title">
           <p class="title-1">Tell us about</p>
           <p class="title-2">Your Residence</p>
           <p class="info-progress">(4/7)</p>
         </div>
-        <el-form :model="form" :rules="rules" ref="form" label-position="top" label-width="100px" class="custom-form">
-          <el-form-item label="Where did you live the longest between ages 6 and 18" prop="child_address">
-            <el-input v-model="form.child_address" placeholder="Childhood Address"></el-input>
+        <el-form :model="form" :rules="rules" ref="form" class="custom-form">
+          <!-- Child Address -->
+          <el-form-item label="Where did you live the longest between ages 6 and 18?" prop="child_address">
+            <el-cascader
+                :options="addressOptions"
+                placeholder="Select your childhood address"
+                @change="handleAddressChange('child_address', $event)"
+                clearable>
+            </el-cascader>
           </el-form-item>
 
-          <el-form-item label="Where have you lived the longest up till now?" prop="long_address">
-            <el-input v-model="form.long_address" placeholder="Long-term Address"></el-input>
+          <!-- Long Address -->
+          <el-form-item label="Where have you lived the longest up until now?" prop="long_address">
+            <el-cascader
+                :options="addressOptions"
+                placeholder="Select your long-term address"
+                @change="handleAddressChange('long_address', $event)"
+                clearable>
+            </el-cascader>
           </el-form-item>
+
+
         </el-form>
       </div>
 
@@ -143,116 +164,6 @@
                     v-model="form.first_language"
                     placeholder="Please specify your first language">
           </el-input>
-
-<!--          &lt;!&ndash; Dropdown for first language selection &ndash;&gt;-->
-<!--          <el-select v-if="form.is_English_First_Language === 'No'" v-model="form.first_language" placeholder="Select your first language" filterable-->
-<!--                     popper-class="custom-select-dropdown">-->
-<!--            &lt;!&ndash; Options for language selection &ndash;&gt;-->
-<!--            <el-option label="Afrikaans" value="Afrikaans"></el-option>-->
-<!--            <el-option label="Albanian" value="Albanian"></el-option>-->
-<!--            <el-option label="Amharic" value="Amharic"></el-option>-->
-<!--            <el-option label="Arabic" value="Arabic"></el-option>-->
-<!--            <el-option label="Armenian" value="Armenian"></el-option>-->
-<!--            <el-option label="Azerbaijani" value="Azerbaijani"></el-option>-->
-<!--            <el-option label="Basque" value="Basque"></el-option>-->
-<!--            <el-option label="Belarusian" value="Belarusian"></el-option>-->
-<!--            <el-option label="Bengali" value="Bengali"></el-option>-->
-<!--            <el-option label="Bosnian" value="Bosnian"></el-option>-->
-<!--            <el-option label="Bulgarian" value="Bulgarian"></el-option>-->
-<!--            <el-option label="Catalan" value="Catalan"></el-option>-->
-<!--            <el-option label="Cebuano" value="Cebuano"></el-option>-->
-<!--            <el-option label="Chichewa" value="Chichewa"></el-option>-->
-<!--            <el-option label="Chinese" value="Chinese"></el-option>-->
-<!--            <el-option label="Corsican" value="Corsican"></el-option>-->
-<!--            <el-option label="Croatian" value="Croatian"></el-option>-->
-<!--            <el-option label="Czech" value="Czech"></el-option>-->
-<!--            <el-option label="Danish" value="Danish"></el-option>-->
-<!--            <el-option label="Dutch" value="Dutch"></el-option>-->
-<!--            <el-option label="Esperanto" value="Esperanto"></el-option>-->
-<!--            <el-option label="Estonian" value="Estonian"></el-option>-->
-<!--            <el-option label="Filipino" value="Filipino"></el-option>-->
-<!--            <el-option label="Finnish" value="Finnish"></el-option>-->
-<!--            <el-option label="French" value="French"></el-option>-->
-<!--            <el-option label="Galician" value="Galician"></el-option>-->
-<!--            <el-option label="Georgian" value="Georgian"></el-option>-->
-<!--            <el-option label="German" value="German"></el-option>-->
-<!--            <el-option label="Greek" value="Greek"></el-option>-->
-<!--            <el-option label="Gujarati" value="Gujarati"></el-option>-->
-<!--            <el-option label="Haitian Creole" value="Haitian Creole"></el-option>-->
-<!--            <el-option label="Hausa" value="Hausa"></el-option>-->
-<!--            <el-option label="Hawaiian" value="Hawaiian"></el-option>-->
-<!--            <el-option label="Hebrew" value="Hebrew"></el-option>-->
-<!--            <el-option label="Hindi" value="Hindi"></el-option>-->
-<!--            <el-option label="Hmong" value="Hmong"></el-option>-->
-<!--            <el-option label="Hungarian" value="Hungarian"></el-option>-->
-<!--            <el-option label="Icelandic" value="Icelandic"></el-option>-->
-<!--            <el-option label="Igbo" value="Igbo"></el-option>-->
-<!--            <el-option label="Indonesian" value="Indonesian"></el-option>-->
-<!--            <el-option label="Irish" value="Irish"></el-option>-->
-<!--            <el-option label="Italian" value="Italian"></el-option>-->
-<!--            <el-option label="Japanese" value="Japanese"></el-option>-->
-<!--            <el-option label="Javanese" value="Javanese"></el-option>-->
-<!--            <el-option label="Kannada" value="Kannada"></el-option>-->
-<!--            <el-option label="Kazakh" value="Kazakh"></el-option>-->
-<!--            <el-option label="Khmer" value="Khmer"></el-option>-->
-<!--            <el-option label="Korean" value="Korean"></el-option>-->
-<!--            <el-option label="Kurdish (Kurmanji)" value="Kurdish (Kurmanji)"></el-option>-->
-<!--            <el-option label="Kyrgyz" value="Kyrgyz"></el-option>-->
-<!--            <el-option label="Lao" value="Lao"></el-option>-->
-<!--            <el-option label="Latin" value="Latin"></el-option>-->
-<!--            <el-option label="Latvian" value="Latvian"></el-option>-->
-<!--            <el-option label="Lithuanian" value="Lithuanian"></el-option>-->
-<!--            <el-option label="Luxembourgish" value="Luxembourgish"></el-option>-->
-<!--            <el-option label="Macedonian" value="Macedonian"></el-option>-->
-<!--            <el-option label="Malagasy" value="Malagasy"></el-option>-->
-<!--            <el-option label="Malay" value="Malay"></el-option>-->
-<!--            <el-option label="Malayalam" value="Malayalam"></el-option>-->
-<!--            <el-option label="Maltese" value="Maltese"></el-option>-->
-<!--            <el-option label="Maori" value="Maori"></el-option>-->
-<!--            <el-option label="Marathi" value="Marathi"></el-option>-->
-<!--            <el-option label="Mongolian" value="Mongolian"></el-option>-->
-<!--            <el-option label="Myanmar (Burmese)" value="Myanmar (Burmese)"></el-option>-->
-<!--            <el-option label="Nepali" value="Nepali"></el-option>-->
-<!--            <el-option label="Norwegian" value="Norwegian"></el-option>-->
-<!--            <el-option label="Odia" value="Odia"></el-option>-->
-<!--            <el-option label="Pashto" value="Pashto"></el-option>-->
-<!--            <el-option label="Persian" value="Persian"></el-option>-->
-<!--            <el-option label="Polish" value="Polish"></el-option>-->
-<!--            <el-option label="Portuguese" value="Portuguese"></el-option>-->
-<!--            <el-option label="Punjabi" value="Punjabi"></el-option>-->
-<!--            <el-option label="Romanian" value="Romanian"></el-option>-->
-<!--            <el-option label="Russian" value="Russian"></el-option>-->
-<!--            <el-option label="Samoan" value="Samoan"></el-option>-->
-<!--            <el-option label="Scots Gaelic" value="Scots Gaelic"></el-option>-->
-<!--            <el-option label="Serbian" value="Serbian"></el-option>-->
-<!--            <el-option label="Sesotho" value="Sesotho"></el-option>-->
-<!--            <el-option label="Shona" value="Shona"></el-option>-->
-<!--            <el-option label="Sindhi" value="Sindhi"></el-option>-->
-<!--            <el-option label="Sinhala" value="Sinhala"></el-option>-->
-<!--            <el-option label="Slovak" value="Slovak"></el-option>-->
-<!--            <el-option label="Slovenian" value="Slovenian"></el-option>-->
-<!--            <el-option label="Somali" value="Somali"></el-option>-->
-<!--            <el-option label="Spanish" value="Spanish"></el-option>-->
-<!--            <el-option label="Sundanese" value="Sundanese"></el-option>-->
-<!--            <el-option label="Swahili" value="Swahili"></el-option>-->
-<!--            <el-option label="Swedish" value="Swedish"></el-option>-->
-<!--            <el-option label="Tajik" value="Tajik"></el-option>-->
-<!--            <el-option label="Tamil" value="Tamil"></el-option>-->
-<!--            <el-option label="Telugu" value="Telugu"></el-option>-->
-<!--            <el-option label="Thai" value="Thai"></el-option>-->
-<!--            <el-option label="Turkish" value="Turkish"></el-option>-->
-<!--            <el-option label="Ukrainian" value="Ukrainian"></el-option>-->
-<!--            <el-option label="Urdu" value="Urdu"></el-option>-->
-<!--            <el-option label="Uzbek" value="Uzbek"></el-option>-->
-<!--            <el-option label="Vietnamese" value="Vietnamese"></el-option>-->
-<!--            <el-option label="Welsh" value="Welsh"></el-option>-->
-<!--            <el-option label="Xhosa" value="Xhosa"></el-option>-->
-<!--            <el-option label="Yiddish" value="Yiddish"></el-option>-->
-<!--            <el-option label="Yoruba" value="Yoruba"></el-option>-->
-<!--            <el-option label="Zulu" value="Zulu"></el-option>-->
-<!--            &lt;!&ndash; Add other languages here &ndash;&gt;-->
-<!--          </el-select>-->
-
         </div>
 
       </div>
@@ -299,6 +210,175 @@ export default {
         is_English_First_Language: '',
         first_language: '',
       },
+      addressOptions: [
+        {
+          value: 'England',
+          label: 'England',
+          children: [
+            { value: 'Bedfordshire', label: 'Bedfordshire' },
+            { value: 'Berkshire', label: 'Berkshire' },
+            { value: 'Bristol', label: 'Bristol' },
+            { value: 'Buckinghamshire', label: 'Buckinghamshire' },
+            { value: 'Cambridgeshire', label: 'Cambridgeshire' },
+            { value: 'Cheshire', label: 'Cheshire' },
+            { value: 'City of London', label: 'City of London' },
+            { value: 'Cornwall', label: 'Cornwall' },
+            { value: 'Cumbria', label: 'Cumbria' },
+            { value: 'Derbyshire', label: 'Derbyshire' },
+            { value: 'Devon', label: 'Devon' },
+            { value: 'Dorset', label: 'Dorset' },
+            { value: 'Durham', label: 'Durham' },
+            { value: 'East Riding of Yorkshire', label: 'East Riding of Yorkshire' },
+            { value: 'East Sussex', label: 'East Sussex' },
+            { value: 'Essex', label: 'Essex' },
+            { value: 'Gloucestershire', label: 'Gloucestershire' },
+            {
+              value: 'Greater London',
+              label: 'Greater London',
+              children: [
+                { value: 'City of London', label: 'City of London' }
+              ]
+            },
+            { value: 'Greater Manchester', label: 'Greater Manchester' },
+            { value: 'Hampshire', label: 'Hampshire' },
+            { value: 'Herefordshire', label: 'Herefordshire' },
+            { value: 'Hertfordshire', label: 'Hertfordshire' },
+            { value: 'Isle of Wight', label: 'Isle of Wight' },
+            { value: 'Kent', label: 'Kent' },
+            { value: 'Lancashire', label: 'Lancashire' },
+            { value: 'Leicestershire', label: 'Leicestershire' },
+            { value: 'Lincolnshire', label: 'Lincolnshire' },
+            { value: 'Merseyside', label: 'Merseyside' },
+            { value: 'Norfolk', label: 'Norfolk' },
+            { value: 'North Yorkshire', label: 'North Yorkshire' },
+            { value: 'Northamptonshire', label: 'Northamptonshire' },
+            {
+              value: 'Northumberland',
+              label: 'Northumberland',
+              children: [
+                { value: 'Blyth Valley', label: 'Blyth Valley' },
+                { value: 'Wansbeck', label: 'Wansbeck' },
+                { value: 'Castle Morpeth', label: 'Castle Morpeth' },
+                { value: 'Alnwick', label: 'Alnwick' },
+                { value: 'Berwick-upon-Tweed', label: 'Berwick-upon-Tweed' },
+                { value: 'Hexham', label: 'Hexham' },
+                { value: 'Tynedale', label: 'Tynedale' }
+              ]
+            },
+            { value: 'Nottinghamshire', label: 'Nottinghamshire' },
+            { value: 'Oxfordshire', label: 'Oxfordshire' },
+            { value: 'Rutland', label: 'Rutland' },
+            { value: 'Shropshire', label: 'Shropshire' },
+            { value: 'Somerset', label: 'Somerset' },
+            { value: 'South Yorkshire', label: 'South Yorkshire' },
+            { value: 'Staffordshire', label: 'Staffordshire' },
+            { value: 'Suffolk', label: 'Suffolk' },
+            { value: 'Surrey', label: 'Surrey' },
+            {
+              value: 'Tyne and Wear',
+              label: 'Tyne and Wear',
+              children: [
+                { value: 'Newcastle upon Tyne', label: 'Newcastle upon Tyne' },
+                { value: 'Gateshead', label: 'Gateshead' },
+                { value: 'Sunderland', label: 'Sunderland' },
+                { value: 'North Tyneside', label: 'North Tyneside' },
+                { value: 'South Tyneside', label: 'South Tyneside' }
+              ]
+            },
+            { value: 'Warwickshire', label: 'Warwickshire' },
+            { value: 'West Midlands', label: 'West Midlands' },
+            { value: 'West Sussex', label: 'West Sussex' },
+            { value: 'West Yorkshire', label: 'West Yorkshire' },
+            { value: 'Wiltshire', label: 'Wiltshire' },
+            { value: 'Worcestershire', label: 'Worcestershire' }
+          ]
+        },
+        {
+          value: 'Scotland',
+          label: 'Scotland',
+          children: [
+            { value: 'Aberdeen City', label: 'Aberdeen City' },
+            { value: 'Aberdeenshire', label: 'Aberdeenshire' },
+            { value: 'Angus', label: 'Angus' },
+            { value: 'Argyll and Bute', label: 'Argyll and Bute' },
+            { value: 'Clackmannanshire', label: 'Clackmannanshire' },
+            { value: 'Dumfries and Galloway', label: 'Dumfries and Galloway' },
+            { value: 'Dundee City', label: 'Dundee City' },
+            { value: 'East Ayrshire', label: 'East Ayrshire' },
+            { value: 'East Dunbartonshire', label: 'East Dunbartonshire' },
+            { value: 'East Lothian', label: 'East Lothian' },
+            { value: 'East Renfrewshire', label: 'East Renfrewshire' },
+            { value: 'Edinburgh (City of Edinburgh)', label: 'Edinburgh (City of Edinburgh)' },
+            { value: 'Falkirk', label: 'Falkirk' },
+            { value: 'Fife', label: 'Fife' },
+            { value: 'Glasgow City', label: 'Glasgow City' },
+            { value: 'Highland', label: 'Highland' },
+            { value: 'Inverclyde', label: 'Inverclyde' },
+            { value: 'Midlothian', label: 'Midlothian' },
+            { value: 'Moray', label: 'Moray' },
+            { value: 'Na h-Eileanan Siar (Western Isles)', label: 'Na h-Eileanan Siar (Western Isles)' },
+            { value: 'North Ayrshire', label: 'North Ayrshire' },
+            { value: 'North Lanarkshire', label: 'North Lanarkshire' },
+            { value: 'Orkney Islands', label: 'Orkney Islands' },
+            { value: 'Perth and Kinross', label: 'Perth and Kinross' },
+            { value: 'Renfrewshire', label: 'Renfrewshire' },
+            { value: 'Scottish Borders', label: 'Scottish Borders' },
+            { value: 'Shetland Islands', label: 'Shetland Islands' },
+            { value: 'South Ayrshire', label: 'South Ayrshire' },
+            { value: 'South Lanarkshire', label: 'South Lanarkshire' },
+            { value: 'Stirling', label: 'Stirling' },
+            { value: 'West Dunbartonshire', label: 'West Dunbartonshire' },
+            { value: 'West Lothian', label: 'West Lothian' }
+          ]
+        },
+        {
+          value: 'Wales',
+          label: 'Wales',
+          children: [
+            { value: 'Anglesey (Isle of Anglesey)', label: 'Anglesey (Isle of Anglesey)' },
+            { value: 'Blaenau Gwent', label: 'Blaenau Gwent' },
+            { value: 'Bridgend', label: 'Bridgend' },
+            { value: 'Caerphilly', label: 'Caerphilly' },
+            { value: 'Cardiff', label: 'Cardiff' },
+            { value: 'Carmarthenshire', label: 'Carmarthenshire' },
+            { value: 'Ceredigion', label: 'Ceredigion' },
+            { value: 'Conwy', label: 'Conwy' },
+            { value: 'Denbighshire', label: 'Denbighshire' },
+            { value: 'Flintshire', label: 'Flintshire' },
+            { value: 'Gwynedd', label: 'Gwynedd' },
+            { value: 'Merthyr Tydfil', label: 'Merthyr Tydfil' },
+            { value: 'Monmouthshire', label: 'Monmouthshire' },
+            { value: 'Neath Port Talbot', label: 'Neath Port Talbot' },
+            { value: 'Newport', label: 'Newport' },
+            { value: 'Pembrokeshire', label: 'Pembrokeshire' },
+            { value: 'Powys', label: 'Powys' },
+            { value: 'Rhondda Cynon Taf', label: 'Rhondda Cynon Taf' },
+            { value: 'Swansea', label: 'Swansea' },
+            { value: 'Torfaen', label: 'Torfaen' },
+            { value: 'Vale of Glamorgan', label: 'Vale of Glamorgan' },
+            { value: 'Wrexham', label: 'Wrexham' }
+          ]
+        },
+        {
+          value: 'Northern Ireland',
+          label: 'Northern Ireland',
+          children: [
+            { value: 'Antrim', label: 'Antrim' },
+            { value: 'Armagh', label: 'Armagh' },
+            { value: 'Down', label: 'Down' },
+            { value: 'Fermanagh', label: 'Fermanagh' },
+            { value: 'Londonderry (Derry)', label: 'Londonderry (Derry)' },
+            { value: 'Tyrone', label: 'Tyrone' }
+          ]
+        },
+        {
+          value: 'Overseas',
+          label: 'Overseas',
+
+        }
+      ],
+
+
       currentText: 'Hi', // Initial text
       textOptions: ['Hi', 'Alreet', 'Howay'], // List of rotating text options
       currentIndex: 0, // Index for current text
@@ -320,16 +400,13 @@ export default {
           { min: 3, message: 'Postcode must be at least 3 characters long', trigger: 'blur' }
         ],
         current_address: [
-          { required: true, message: 'Address is required', trigger: 'blur' },
-          { min: 5, message: 'Address must be at least 5 characters long', trigger: 'blur' }
+          { required: true, message: 'Current Address is required', trigger: 'change' },
         ],
         long_address: [
-          { required: true, message: 'Long-term address is required', trigger: 'blur' },
-          { min: 5, message: 'Long-term address must be at least 5 characters long', trigger: 'blur' }
+          { required: true, message: 'Long-term address is required', trigger: 'change' },
         ],
         child_address: [
-          { required: true, message: 'Childhood address is required', trigger: 'blur' },
-          { min: 5, message: 'Childhood address must be at least 5 characters long', trigger: 'blur' }
+          { required: true, message: 'Childhood address is required', trigger: 'change' },
         ],
         age: [
           { required: true, message: 'Age is required', trigger: 'blur' },
@@ -363,6 +440,21 @@ export default {
         this.page--;
       }
     },
+    handleAddressChange(fieldName, selectedValues) {
+      console.log(`Selected values for ${fieldName}:`, selectedValues); // Debugging: Log selected values
+      if (selectedValues && selectedValues.length > 0) {
+        // Join the selected values using a hyphen and update the form field
+        this.form[fieldName] = selectedValues.join('-');
+        console.log(`Updated ${fieldName}:`, this.form[fieldName]); // Debugging: Log updated field value
+      } else {
+        this.form[fieldName] = ''; // Reset the field if no values are selected
+      }
+    },
+
+
+
+
+
     validatePage() {
       this.$refs.form.validate((valid) => {
         if (valid) {
