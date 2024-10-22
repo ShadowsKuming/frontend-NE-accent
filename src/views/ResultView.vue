@@ -24,7 +24,7 @@
           <div class= "data-frame">{{accuracy}}%</div>
         </div>
       </div>
-      <button class="custom-button" @click="viewRanking">Play Again</button>
+      <button class="custom-button" @click="goToQuestionnaire">Finish Game</button>
 
     </div>
 
@@ -69,6 +69,9 @@ export default {
   methods: {
     viewRanking(){
       this.$router.push({name: 'ranking'});
+    },
+    goToQuestionnaire(){
+      this.$router.push({ name: 'questionnaire', params: { questionnaire_id: Number(this.result_id)} });
     }
   }
 };
