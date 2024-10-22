@@ -187,7 +187,28 @@
         </el-button>
       </div>
     </div>
+
+
+    <div class="overlay-dialog" v-if = "dialogVisible" @click="goNextView" >
+      <div class="dialog-content">
+        <h2>How to play</h2>
+        <p>
+          Click on the play icon to hear the sound, and then click on the name of the place where the speaker is from.
+        </p>
+
+        <p>
+          The top three players on the leaderboard who complete the whole game will win a £30 (1st place), £20 (2nd place), and £10 (3rd place) voucher.
+        </p>
+        <p>In case of a tie, the winners will be decided through a draw.</p>
+
+
+
+
+      </div>
+    </div>
+
   </div>
+
 </template>
 
 <script>
@@ -196,6 +217,8 @@ import request from "@/utils/request";
 export default {
   data() {
     return {
+      id: 0,
+      dialogVisible: false,
       page: 1, // Current page
       form: {
         username: '',
@@ -470,7 +493,8 @@ export default {
           .then(res => {
             if (res.code === '0') {
               // Redirect to the game page with client_id parameter from res
-              this.$router.push({ name: 'game', params: { client_id: res.data} });
+              this.id = res.data;
+              this.dialogVisible = true;
             } else {
               alert(res.message); // Show error message if submission fails
               return false;
@@ -479,6 +503,9 @@ export default {
           .catch(error => {
             console.error('Form submission error:', error); // Log any errors during submission
           });
+    },
+    goNextView(){
+      this.$router.push({ name: 'game', params: { client_id: this.id} });
     },
     // Start text rotation function
     startTextRotation() {
@@ -493,6 +520,29 @@ export default {
 </script>
 
 <style>
+
+
+.dialog-content{
+  position: absolute;
+  top: 5%;
+  left: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 94vw;
+  height: 90vh;
+  background: rgba(255,255,255,0.8);
+
+  color: #6ea794;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 30px;
+}
+
+.dialog-content{
+}
+
+
 .information-page {
   position: relative;
   background-image: url("@/assets/BackgroundImage 1.png");
@@ -529,7 +579,6 @@ export default {
   background: white;
   padding: 40px;
   border-radius: 10px;
-
   transform: scale(1.5);  /* 1.5x scaling */
   transform-origin: top center;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -639,7 +688,7 @@ export default {
   justify-content: space-between;
 }
 
-.button-back, .button-next {
+.button-back, .button-next ,.button-submit{
   background-color: #eaf6f5;
   color: #008080;
   border-radius: 4px;
