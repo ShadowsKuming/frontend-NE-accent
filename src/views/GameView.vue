@@ -111,6 +111,7 @@ export default {
       audioPlaying: false,
       answerClickable: false,
       dialogVisible: true,
+      audio_duration:0,
     };
   },
   created() {
@@ -145,7 +146,7 @@ export default {
                   setTimeout(() => {
                     document.getElementById('right').style.display = 'none';
                     document.getElementById('right2').style.display = 'none';
-                  }, 2000);
+                  }, 0);
 
                 }else{
 
@@ -154,7 +155,7 @@ export default {
                   setTimeout(() => {
                     document.getElementById('wrong').style.display = 'none';
                     document.getElementById('wrong2').style.display = 'none';
-                  }, 2000);
+                  }, 0);
                 }
 
                 setTimeout(()=>{
@@ -162,7 +163,7 @@ export default {
                     this.dialogVisible = true;
                   }
                     this.handleResponse(res);
-                },2000);
+                },0);
 
               } else {
                 alert(res.message); // Show error message
@@ -204,20 +205,30 @@ export default {
       request.get("/game/playAudio", { params: { id: this.client_id } }).then(res => {
         if (res.code === '0') {
           const audioUrl = `http://localhost:8081${res.data}`;
-          // 音频播放时长
           this.$refs.audioPlayer.src = audioUrl;
-          this.$refs.audioPlayer.play();
+
+          // 当音频可以播放时触发
+          this.$refs.audioPlayer.addEventListener('canplaythrough', () => {
+            const duration = this.$refs.audioPlayer.duration; // 获取音频的总时长
+            this.audio_duration = duration * 1000;
+            console.log(this.audio_duration);
+
+            // 动态设置超时时间为音频的时长
+            setTimeout(() => {
+              this.answerClickable = true; // 在音频播放结束后激活按钮
+            }, this.audio_duration);
+
+            // 播放音频
+            this.$refs.audioPlayer.play();
+          });
+
         } else {
           alert(res.message);
           return false;
         }
         this.audioPlaying = true;
-
-        setTimeout(() => {
-          this.answerClickable = true;
-        }, 4000);
-
       });
+
     },
     finishGame(){
       this.$router.push({ name: 'result', params: { result_id: Number(this.client_id)} });
