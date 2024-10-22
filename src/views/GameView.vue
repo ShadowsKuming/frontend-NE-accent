@@ -110,7 +110,7 @@ export default {
       },
       audioPlaying: false,
       answerClickable: false,
-      dialogVisible: true,
+      dialogVisible: false,
       audio_duration:0,
     };
   },
