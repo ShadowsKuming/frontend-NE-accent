@@ -48,49 +48,81 @@ import request from "@/utils/request";
 export default {
   data() {
     return {
-      leaderboard: [] // To store leaderboard data
+      leaderboard: [], // 存储排行榜数据
+      scrollInterval: null, // 滚动的 interval 引用
+      currentScroll: 0, // 当前的滚动位置
+      refreshInterval: null, // 数据刷新的 interval 引用
     };
   },
   methods: {
-    // Fetch leaderboard data from backend
+    // 从后台获取排行榜数据
     fetchLeaderboard() {
       request.get("/ranking/getRanking").then((res) => {
-        this.leaderboard = res.data; // Get processed data from backend
+        // 获取后台处理过的数据
+        this.leaderboard = res.data;
+
+        // 更新数据后，确保保持当前的滚动位置，避免跳动
         this.$nextTick(() => {
-          this.startAutoScroll(); // Start auto-scrolling after content is loaded
+          if (this.$refs.scrollContainer) {
+            this.$refs.scrollContainer.scrollTop = this.currentScroll; // 恢复滚动位置
+          }
+          this.startAutoScroll(); // 确保数据更新后继续自动滚动
         });
       });
     },
-    // Auto-scroll method
+    // 自动滚动方法
     startAutoScroll() {
       const container = this.$refs.scrollContainer;
-      let scrollHeight = container.scrollHeight;
-      let currentScroll = 0;
 
-      setInterval(() => {
-        if (currentScroll < scrollHeight - container.clientHeight) {
-          currentScroll += 1; // Scroll by 1px every step
-        } else {
-          currentScroll = 0; // Reset scroll position at the bottom
+      if (this.scrollInterval) {
+        clearInterval(this.scrollInterval); // 避免重复创建 interval
+      }
+
+      let scrollHeight = container.scrollHeight;
+      let scrollStep = 1;  // 每次滚动 1px
+
+      const scroll = () => {
+        scrollHeight = container.scrollHeight; // 每次确保获取最新的滚动高度
+
+        // 当到达底部时，从顶部开始
+        if (this.currentScroll >= scrollHeight - container.clientHeight) {
+          container.style.transition = "none"; // 取消过渡效果
+          this.currentScroll = 0; // 重置滚动位置
+          container.scrollTop = this.currentScroll;
         }
-        container.scrollTop = currentScroll;
-      }, 50); // Adjust speed: scroll 1px every 50ms
-    }
+
+        // 启用平滑滚动
+        setTimeout(() => {
+          container.style.transition = "scroll-top 0.5s ease"; // 启用平滑过渡
+          this.currentScroll += scrollStep; // 继续向下滚动
+          container.scrollTop = this.currentScroll;
+        }, 20); // 延迟短暂时间，避免闪烁
+      };
+
+      // 设置滚动间隔
+      this.scrollInterval = setInterval(scroll, 50); // 每 50ms 滚动 1px
+    },
   },
   mounted() {
-    this.fetchLeaderboard(); // Fetch leaderboard data when component loads
+    // 加载组件时获取排行榜数据
+    this.fetchLeaderboard();
 
+    // 定时刷新排行榜数据
     this.refreshInterval = setInterval(() => {
       this.fetchLeaderboard();
-    }, 5000);
+    }, 5000); // 每 5 秒刷新一次数据
   },
   beforeDestroy() {
-    // Clear the interval when the component is destroyed
+    // 清除滚动和数据刷新的 interval，避免内存泄漏
     if (this.refreshInterval) {
       clearInterval(this.refreshInterval);
     }
+    if (this.scrollInterval) {
+      clearInterval(this.scrollInterval);
+    }
   }
 };
+
 </script>
 
 <style>
