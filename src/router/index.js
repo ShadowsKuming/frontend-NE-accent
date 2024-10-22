@@ -38,6 +38,12 @@ const routes = [
     name: 'ranking',
     component:() => import(/* webpackChunkName: "about" */ '../views/RankingView.vue'),
     props: true
+  },
+  {
+    path: '/thanks',
+    name: 'thanks',
+    component:() => import(/* webpackChunkName: "about" */ '../views/ThanksView.vue'),
+    props: true
   }
 ]
 
