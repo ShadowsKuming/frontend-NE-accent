@@ -58,9 +58,9 @@
           <p class="info-progress">(3/7)</p>
         </div>
         <el-form :model="form" :rules="rules" ref="form" label-width="100px" class="custom-form">
-          <el-form-item label="Postcode" prop="postcode">
-            <el-input v-model="form.postcode" placeholder="Postcode"></el-input>
-          </el-form-item>
+<!--          <el-form-item label="Postcode" prop="postcode">-->
+<!--            <el-input v-model="form.postcode" placeholder="Postcode"></el-input>-->
+<!--          </el-form-item>-->
 
           <el-form-item label="Current Address" prop="current_address">
             <el-cascader
@@ -419,7 +419,7 @@ export default {
           { required: true, message: 'Education level is required', trigger: 'change' }
         ],
         postcode: [
-          { required: true, message: 'Postcode is required', trigger: 'blur' },
+          { required: false, message: 'Postcode is required', trigger: 'blur' },
           { min: 3, message: 'Postcode must be at least 3 characters long', trigger: 'blur' }
         ],
         current_address: [

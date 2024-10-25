@@ -159,7 +159,7 @@ export default {
   padding: 40px;
   align-items: start;
   gap: 28px;
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .group-vertical {
@@ -258,6 +258,15 @@ p {
   position: absolute;
   right: 0;
 }
+
+.custom-error-position .el-form-item__error {
+  position: absolute;
+  top: 20px;
+  left: 400px;
+  color: red;
+  font-size: 12px;
+}
+
 
 /* Media queries for mobile responsiveness */
 @media (max-width: 768px) {
