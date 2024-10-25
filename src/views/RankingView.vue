@@ -127,6 +127,7 @@ export default {
 
 <style>
 .ranking-page {
+  overflow-x: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -268,8 +269,9 @@ export default {
 }
 
 @media (orientation: portrait) {
+
   .ranking-frame{
-    transform: scale(0.6);
+    transform: scale(0.4);
   }
 }
 </style>

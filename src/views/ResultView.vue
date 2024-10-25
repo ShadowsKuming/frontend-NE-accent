@@ -24,7 +24,7 @@
           <div class= "data-frame">{{accuracy}}%</div>
         </div>
       </div>
-      <button class="custom-button" @click="dialogVisible=true">Finish Game</button>
+      <button class="custom-button" @click="dialogVisible=true">Win Voucher</button>
 
     </div>
 
