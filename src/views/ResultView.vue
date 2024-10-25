@@ -24,9 +24,34 @@
           <div class= "data-frame">{{accuracy}}%</div>
         </div>
       </div>
-      <button class="custom-button" @click="goToQuestionnaire">Finish Game</button>
+      <button class="custom-button" @click="dialogVisible=true">Finish Game</button>
 
     </div>
+
+    <div v-if="dialogVisible" class="custom-dialog-overlay">
+      <div class="custom-dialog">
+        <img src="@/assets/voucher.svg" alt="">
+        <div class="custom-dialog-content">
+          <p class="voucher-title">Thank you for playing! The top 3 players will win vouchers!</p>
+          <p class="voucher-content">To qualify for a prize, please take a moment to complete our short survey (just 1 min).
+            Your feedback is essential for our event evaluation and will help us hold similar events in the future.</p>
+
+
+        </div>
+
+
+        <div class="custom-dialog-footer">
+          <el-button type="primary" @click="goToQuestionnaire" class="custom-button">
+            Start Survey and Win <i class="el-icon-arrow-right"></i>
+          </el-button>
+
+          <el-button type="primary" @click="goToThanksView" class="custom-button">
+            Skip Survey and Prize
+          </el-button>
+        </div>
+      </div>
+    </div>
+
 
   </div>
 
@@ -49,7 +74,8 @@ export default {
       rank:20,
       total:30,
       dialogVisible: false,
-      questionDetails: []
+      questionDetails: [],
+
     };
   },
   created() {
@@ -72,6 +98,9 @@ export default {
     },
     goToQuestionnaire(){
       this.$router.push({ name: 'questionnaire', params: { questionnaire_id: Number(this.result_id)} });
+    },
+    goToThanksView(){
+      this.$router.push({name: 'thanks'})
     }
   }
 };
@@ -239,8 +268,8 @@ export default {
 
 .custom-button{
 
-  background-color: rgb(0, 168, 144);
-  color: white;
+  background-color: #e8f4f3;
+  color: #00a48d;
   padding: 14px 24px;
   border: none;
   border-radius: 2px;
@@ -249,16 +278,81 @@ export default {
   transition: background-color 0.3s ease;
 }
 
+
+
 .custom-button:active,
 .custom-button:focus{
-  background-color: #e8f4f3;
-  color: #00a48d;
+  background-color: rgb(0, 168, 144);
+  color: white;
 }
 
 .custom-button:hover {
-  background-color: #e8f4f3;
-  color: #00a48d;
+  background-color: rgb(0, 168, 144);
+  color: white;
 }
+
+
+/* Fullscreen overlay to make the background darker */
+.custom-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  //background-image: url('@/assets/BackgroundImage 3.png');
+  animation: fadeIn 0.5s;
+}
+
+/* Custom dialog box */
+.custom-dialog {
+  background-color: white;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: width 0.3s ease;
+  width: 540px;
+  height: 474px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+
+
+
+.voucher-content{
+  margin-bottom: 16px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color:  #4F5E71;
+  align-self: stretch;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+
+}
+.voucher-title{
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  align-self: stretch;
+  color: #FF832B;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+}
+
+/* Footer with button */
+.custom-dialog-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
 
 @media (max-width: 768px) {
   .result-frame {

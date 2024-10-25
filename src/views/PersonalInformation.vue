@@ -539,8 +539,6 @@ export default {
   font-size: 30px;
 }
 
-.dialog-content{
-}
 
 
 .information-page {
