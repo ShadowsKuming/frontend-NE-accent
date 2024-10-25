@@ -532,7 +532,7 @@ export default {
   flex-direction: column;
   width: 94vw;
   height: 90vh;
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.9);
 
   color: #6ea794;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

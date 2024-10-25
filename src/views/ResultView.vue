@@ -355,6 +355,10 @@ export default {
 
 
 @media (max-width: 768px) {
+
+  .custom-dialog{
+    width: 90vw;
+  }
   .result-frame {
     display: flex;
     justify-content: center;
