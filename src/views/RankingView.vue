@@ -148,6 +148,7 @@ export default {
   background: rgba(255, 255, 255, 0.45);
   flex-direction: column;
   padding: 24px;
+  transform: scale(0.8);
 }
 
 .top3-frame {
