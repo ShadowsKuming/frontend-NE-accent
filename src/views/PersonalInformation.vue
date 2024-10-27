@@ -62,7 +62,7 @@
 <!--            <el-input v-model="form.postcode" placeholder="Postcode"></el-input>-->
 <!--          </el-form-item>-->
 
-          <el-form-item label="Current Address" prop="current_address">
+          <el-form-item label="Select" prop="current_address">
             <el-cascader
                 :options="addressOptions"
                 placeholder="Select your current address"
@@ -250,18 +250,21 @@ export default {
             { value: 'Derbyshire', label: 'Derbyshire' },
             { value: 'Devon', label: 'Devon' },
             { value: 'Dorset', label: 'Dorset' },
-            { value: 'Durham', label: 'Durham' },
+            {
+              value: 'Durham',
+              label: 'Durham',
+              children: [
+                { value: 'Darlington', label: 'Darlington' },
+                { value: 'Durham', label: 'Durham' },
+                { value: 'Hartlepool', label: 'Hartlepool' },
+                { value: 'Stockton-on-Tees', label: 'Stockton-on-Tees' }
+              ]
+            },
             { value: 'East Riding of Yorkshire', label: 'East Riding of Yorkshire' },
             { value: 'East Sussex', label: 'East Sussex' },
             { value: 'Essex', label: 'Essex' },
             { value: 'Gloucestershire', label: 'Gloucestershire' },
-            {
-              value: 'Greater London',
-              label: 'Greater London',
-              children: [
-                { value: 'City of London', label: 'City of London' }
-              ]
-            },
+            { value: 'Greater London', label: 'Greater London' },
             { value: 'Greater Manchester', label: 'Greater Manchester' },
             { value: 'Hampshire', label: 'Hampshire' },
             { value: 'Herefordshire', label: 'Herefordshire' },
@@ -671,7 +674,7 @@ export default {
 }
 
 .custom-select-dropdown .el-select-dropdown__item {
-  font-size: 20px;
+  font-size: 1.5em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -711,6 +714,23 @@ export default {
   margin-right: 4px;
 }
 
+/* Change font for the input part of the cascader */
+.el-cascader .el-input__inner {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Change font for the dropdown items */
+.el-cascader-menu {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.el-form {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.el-form-item {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
 .el-picker-panel .el-date-table {
   font-size: 1.35em;
