@@ -191,19 +191,29 @@
 
     <div class="overlay-dialog" v-if = "dialogVisible" @click="goNextView" >
       <div class="dialog-content">
-        <h2>How to play</h2>
+        <h2 style="color: #333; margin-bottom: 15px;">🎮 How to Play 🎮</h2>
+        <ol>
+          <li>
+            Click on the '<strong>Wey Aye</strong>' button to listen to the sound clip.
+          </li>
+          <li>
+            Identify where the accent in the audio is from and <strong>click</strong> on it on the map.
+          </li>
+          <li>
+            Complete the <strong>questionnaire</strong> to qualify for winning the vouchers.
+          </li>
+        </ol>
         <p>
-          Click on the play icon to hear the sound, and then click on the name of the place where the speaker is from.
+          💰The top three players on the leaderboard who complete the entire game (including questionnaire) will receive:
         </p>
-
+        <ul>
+          <li>🏆 £30 for 1st place</li>
+          <li>🥈 £20 for 2nd place</li>
+          <li>🥉 £10 for 3rd place</li>
+        </ul>
         <p>
-          The top three players on the leaderboard who complete the whole game will win a £30 (1st place), £20 (2nd place), and £10 (3rd place) voucher.
+          In the event of a tie, winners will be determined through a draw. 🎲
         </p>
-        <p>In case of a tie, the winners will be decided through a draw.</p>
-
-
-
-
       </div>
     </div>
 
@@ -238,6 +248,40 @@ export default {
           value: 'England',
           label: 'England',
           children: [
+            {
+              value: 'Durham',
+              label: '[NE-]Durham',
+              children: [
+                { value: 'Darlington', label: 'Darlington' },
+                { value: 'Durham', label: 'Durham' },
+                { value: 'Hartlepool', label: 'Hartlepool' },
+                { value: 'Stockton-on-Tees', label: 'Stockton-on-Tees' }
+              ]
+            },
+            {
+              value: 'Northumberland',
+              label: '[NE-]Northumberland',
+              children: [
+                { value: 'Blyth Valley', label: 'Blyth Valley' },
+                { value: 'Wansbeck', label: 'Wansbeck' },
+                { value: 'Castle Morpeth', label: 'Castle Morpeth' },
+                { value: 'Alnwick', label: 'Alnwick' },
+                { value: 'Berwick-upon-Tweed', label: 'Berwick-upon-Tweed' },
+                { value: 'Hexham', label: 'Hexham' },
+                { value: 'Tynedale', label: 'Tynedale' }
+              ]
+            },
+            {
+              value: 'Tyne and Wear',
+              label: '[NE-]Tyne and Wear',
+              children: [
+                { value: 'Newcastle upon Tyne', label: 'Newcastle upon Tyne' },
+                { value: 'Gateshead', label: 'Gateshead' },
+                { value: 'Sunderland', label: 'Sunderland' },
+                { value: 'North Tyneside', label: 'North Tyneside' },
+                { value: 'South Tyneside', label: 'South Tyneside' }
+              ]
+            },
             { value: 'Bedfordshire', label: 'Bedfordshire' },
             { value: 'Berkshire', label: 'Berkshire' },
             { value: 'Bristol', label: 'Bristol' },
@@ -250,16 +294,16 @@ export default {
             { value: 'Derbyshire', label: 'Derbyshire' },
             { value: 'Devon', label: 'Devon' },
             { value: 'Dorset', label: 'Dorset' },
-            {
-              value: 'Durham',
-              label: 'Durham',
-              children: [
-                { value: 'Darlington', label: 'Darlington' },
-                { value: 'Durham', label: 'Durham' },
-                { value: 'Hartlepool', label: 'Hartlepool' },
-                { value: 'Stockton-on-Tees', label: 'Stockton-on-Tees' }
-              ]
-            },
+            // {
+            //   value: 'Durham',
+            //   label: 'Durham',
+            //   children: [
+            //     { value: 'Darlington', label: 'Darlington' },
+            //     { value: 'Durham', label: 'Durham' },
+            //     { value: 'Hartlepool', label: 'Hartlepool' },
+            //     { value: 'Stockton-on-Tees', label: 'Stockton-on-Tees' }
+            //   ]
+            // },
             { value: 'East Riding of Yorkshire', label: 'East Riding of Yorkshire' },
             { value: 'East Sussex', label: 'East Sussex' },
             { value: 'Essex', label: 'Essex' },
@@ -278,19 +322,19 @@ export default {
             { value: 'Norfolk', label: 'Norfolk' },
             { value: 'North Yorkshire', label: 'North Yorkshire' },
             { value: 'Northamptonshire', label: 'Northamptonshire' },
-            {
-              value: 'Northumberland',
-              label: 'Northumberland',
-              children: [
-                { value: 'Blyth Valley', label: 'Blyth Valley' },
-                { value: 'Wansbeck', label: 'Wansbeck' },
-                { value: 'Castle Morpeth', label: 'Castle Morpeth' },
-                { value: 'Alnwick', label: 'Alnwick' },
-                { value: 'Berwick-upon-Tweed', label: 'Berwick-upon-Tweed' },
-                { value: 'Hexham', label: 'Hexham' },
-                { value: 'Tynedale', label: 'Tynedale' }
-              ]
-            },
+            // {
+            //   value: 'Northumberland',
+            //   label: 'Northumberland',
+            //   children: [
+            //     { value: 'Blyth Valley', label: 'Blyth Valley' },
+            //     { value: 'Wansbeck', label: 'Wansbeck' },
+            //     { value: 'Castle Morpeth', label: 'Castle Morpeth' },
+            //     { value: 'Alnwick', label: 'Alnwick' },
+            //     { value: 'Berwick-upon-Tweed', label: 'Berwick-upon-Tweed' },
+            //     { value: 'Hexham', label: 'Hexham' },
+            //     { value: 'Tynedale', label: 'Tynedale' }
+            //   ]
+            // },
             { value: 'Nottinghamshire', label: 'Nottinghamshire' },
             { value: 'Oxfordshire', label: 'Oxfordshire' },
             { value: 'Rutland', label: 'Rutland' },
@@ -300,17 +344,17 @@ export default {
             { value: 'Staffordshire', label: 'Staffordshire' },
             { value: 'Suffolk', label: 'Suffolk' },
             { value: 'Surrey', label: 'Surrey' },
-            {
-              value: 'Tyne and Wear',
-              label: 'Tyne and Wear',
-              children: [
-                { value: 'Newcastle upon Tyne', label: 'Newcastle upon Tyne' },
-                { value: 'Gateshead', label: 'Gateshead' },
-                { value: 'Sunderland', label: 'Sunderland' },
-                { value: 'North Tyneside', label: 'North Tyneside' },
-                { value: 'South Tyneside', label: 'South Tyneside' }
-              ]
-            },
+            // {
+            //   value: 'Tyne and Wear',
+            //   label: 'Tyne and Wear',
+            //   children: [
+            //     { value: 'Newcastle upon Tyne', label: 'Newcastle upon Tyne' },
+            //     { value: 'Gateshead', label: 'Gateshead' },
+            //     { value: 'Sunderland', label: 'Sunderland' },
+            //     { value: 'North Tyneside', label: 'North Tyneside' },
+            //     { value: 'South Tyneside', label: 'South Tyneside' }
+            //   ]
+            // },
             { value: 'Warwickshire', label: 'Warwickshire' },
             { value: 'West Midlands', label: 'West Midlands' },
             { value: 'West Sussex', label: 'West Sussex' },
@@ -526,20 +570,26 @@ export default {
 
 
 .dialog-content{
-  position: absolute;
-  top: 5%;
-  left: 3%;
+  position: fixed;
+  top: 50%; /* Margin from the top */
+  left: 50%; /* Margin from the left */
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 94vw;
-  height: 90vh;
-  background: rgba(255,255,255,0.9);
-
+  width: 98vw; /* Flexible width */
+  max-width: 600px; /* Maximum width for larger screens */
+  height: auto; /* Automatic height to fit content */
+  background: rgba(255, 255, 255, 0.95); /* Less transparent */
   color: #6ea794;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 30px;
+  font-size: 1.3rem; /* Responsive font size */
+  margin: 20px; /* Added margins to all sides */
+  border-radius: 10px; /* Optional: add rounded corners */
+  padding: 20px; /* Padding for inner content */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Optional: shadow for depth */
+  overflow: auto; /* Add scrolling if content exceeds height */
 }
 
 
@@ -760,9 +810,22 @@ export default {
     width: 90%;
     padding: 20px;
 
-    transform: scale(1);  /* Reset scaling for mobile */
+    transform: scale(1); /* Reset scaling for mobile */
     transform-origin: center;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
+}
+
+  @media (max-width: 600px) {
+    .game-dialog-content {
+      width: 98vw; /* Make it wider on smaller screens */
+      font-size: 0.8rem; /* Smaller font size for mobile */
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 1200px) {
+    .game-dialog-content {
+      font-size: 1.5rem; /* Medium font size for tablets */
+    }
 }
 </style>
