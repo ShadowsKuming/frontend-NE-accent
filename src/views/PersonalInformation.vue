@@ -85,7 +85,7 @@
           <!-- Child Address -->
           <el-form-item label="Where did you live the longest between ages 6 and 18?" prop="child_address">
             <el-cascader
-                :options="addressOptions"
+                :options="addressOptions2"
                 placeholder="Select your childhood address"
                 @change="handleAddressChange('child_address', $event)"
                 clearable>
@@ -189,31 +189,41 @@
     </div>
 
 
-    <div class="overlay-dialog" v-if = "dialogVisible" @click="goNextView" >
+<!--    <div class="overlay-dialog" v-if = "dialogVisible" >-->
+    <div class="overlay-dialog" v-if = "dialogVisible" >
       <div class="dialog-content">
         <h2 style="color: #FF832B; margin-bottom: 15px;">🎮 How to Play 🎮</h2>
-        <ol>
-          <li>
-            Click on the '<strong>Wey Aye</strong>' button to listen to the sound clip.
-          </li>
-          <li>
-            Identify where the accent in the audio is from and <strong>click</strong> on it on the map.
-          </li>
-          <li>
-            Complete the <strong>questionnaire</strong> to qualify for winning the vouchers.
-          </li>
-        </ol>
-        <p>
-          💰The top three players on the leaderboard who complete the entire game (including questionnaire) will receive:
-        </p>
-        <ul>
-          <li>🏆 £30 for 1st place</li>
-          <li>🥈 £20 for 2nd place</li>
-          <li>🥉 £10 for 3rd place</li>
-        </ul>
-        <p>
-          In the event of a tie, winners will be determined through a draw. 🎲
-        </p>
+<!--        <ol>-->
+          <p>
+            📢 In the game, click the '<strong>Wey Aye</strong>' button to listen to the sound clip. <br>
+            📢 Now, let’s make sure your audio is working—click the button to hear a long beep!.
+          </p>
+          <div class="play-button"  ref="playButton" @click="playAudio" style="text-align: center;">
+            Wey Aye<br>📢
+          </div>
+          <p>
+            🗺️ Then, identify where the accent in the audio is from and <strong>click</strong> on it on the map. <br>
+            🏆 Finally, complete the <strong>questionnaire</strong> to qualify for winning the vouchers.
+          </p>
+<!--        </ol>-->
+<!--        <p>-->
+<!--          Press the 'Wey Aye' button to play a long beep for audio testing 📢:-->
+<!--        </p>-->
+<!--        <div class="play-button"  ref="playButton" @click="playAudio" style="text-align: center;">-->
+<!--          Wey Aye📢-->
+<!--        </div>-->
+        <audio ref="audioPlayer" ></audio>
+        <p  style="text-align: center;">💰The top three players who complete the entire game (including questionnaire) will win. Ties will be decided by a draw🎲. </p>
+          <ul>
+            <li>🥇 £30 for 1st place</li>
+            <li>🥈 £20 for 2nd place</li>
+            <li>🥉 £10 for 3rd place</li>
+          </ul>
+
+
+        <el-button class="button-game"  ref="playButton" @click="goNextView">
+          Play!
+        </el-button>
       </div>
     </div>
 
@@ -448,6 +458,211 @@ export default {
         }
       ],
 
+      addressOptions2: [
+        {
+          value: 'England',
+          label: 'England',
+          children: [
+            {
+              value: ' Durham',
+              label: '[NE-]Durham',
+              children: [
+                { value: 'Darlington', label: 'Darlington' },
+                { value: 'Durham', label: 'Durham' },
+                { value: 'Hartlepool', label: 'Hartlepool' },
+                { value: 'Stockton-on-Tees', label: 'Stockton-on-Tees' }
+              ]
+            },
+            {
+              value: ' Northumberland',
+              label: '[NE-]Northumberland',
+              children: [
+                { value: 'Blyth Valley', label: 'Blyth Valley' },
+                { value: 'Wansbeck', label: 'Wansbeck' },
+                { value: 'Castle Morpeth', label: 'Castle Morpeth' },
+                { value: 'Alnwick', label: 'Alnwick' },
+                { value: 'Berwick-upon-Tweed', label: 'Berwick-upon-Tweed' },
+                { value: 'Hexham', label: 'Hexham' },
+                { value: 'Tynedale', label: 'Tynedale' }
+              ]
+            },
+            {
+              value: ' Tyne and Wear',
+              label: '[NE-]Tyne and Wear',
+              children: [
+                { value: 'Newcastle upon Tyne', label: 'Newcastle upon Tyne' },
+                { value: 'Gateshead', label: 'Gateshead' },
+                { value: 'Sunderland', label: 'Sunderland' },
+                { value: 'North Tyneside', label: 'North Tyneside' },
+                { value: 'South Tyneside', label: 'South Tyneside' }
+              ]
+            },
+            { value: ' Bedfordshire', label: 'Bedfordshire' },
+            { value: ' Berkshire', label: 'Berkshire' },
+            { value: ' Bristol', label: 'Bristol' },
+            { value: ' Buckinghamshire', label: 'Buckinghamshire' },
+            { value: ' Cambridgeshire', label: 'Cambridgeshire' },
+            { value: ' Cheshire', label: 'Cheshire' },
+            { value: ' City of London', label: 'City of London' },
+            { value: ' Cornwall', label: 'Cornwall' },
+            { value: ' Cumbria', label: 'Cumbria' },
+            { value: ' Derbyshire', label: 'Derbyshire' },
+            { value: ' Devon', label: 'Devon' },
+            { value: ' Dorset', label: 'Dorset' },
+            // {
+            //   value: 'Durham',
+            //   label: 'Durham',
+            //   children: [
+            //     { value: 'Darlington', label: 'Darlington' },
+            //     { value: 'Durham', label: 'Durham' },
+            //     { value: 'Hartlepool', label: 'Hartlepool' },
+            //     { value: 'Stockton-on-Tees', label: 'Stockton-on-Tees' }
+            //   ]
+            // },
+            { value: ' East Riding of Yorkshire', label: 'East Riding of Yorkshire' },
+            { value: ' East Sussex', label: 'East Sussex' },
+            { value: ' Essex', label: 'Essex' },
+            { value: ' Gloucestershire', label: 'Gloucestershire' },
+            { value: ' Greater London', label: 'Greater London' },
+            { value: ' Greater Manchester', label: 'Greater Manchester' },
+            { value: ' Hampshire', label: 'Hampshire' },
+            { value: ' Herefordshire', label: 'Herefordshire' },
+            { value: ' Hertfordshire', label: 'Hertfordshire' },
+            { value: ' Isle of Wight', label: 'Isle of Wight' },
+            { value: ' Kent', label: 'Kent' },
+            { value: ' Lancashire', label: 'Lancashire' },
+            { value: ' Leicestershire', label: 'Leicestershire' },
+            { value: ' Lincolnshire', label: 'Lincolnshire' },
+            { value: ' Merseyside', label: 'Merseyside' },
+            { value: ' Norfolk', label: 'Norfolk' },
+            { value: ' North Yorkshire', label: 'North Yorkshire' },
+            { value: ' Northamptonshire', label: 'Northamptonshire' },
+            // {
+            //   value: 'Northumberland',
+            //   label: 'Northumberland',
+            //   children: [
+            //     { value: 'Blyth Valley', label: 'Blyth Valley' },
+            //     { value: 'Wansbeck', label: 'Wansbeck' },
+            //     { value: 'Castle Morpeth', label: 'Castle Morpeth' },
+            //     { value: 'Alnwick', label: 'Alnwick' },
+            //     { value: 'Berwick-upon-Tweed', label: 'Berwick-upon-Tweed' },
+            //     { value: 'Hexham', label: 'Hexham' },
+            //     { value: 'Tynedale', label: 'Tynedale' }
+            //   ]
+            // },
+            { value: ' Nottinghamshire', label: 'Nottinghamshire' },
+            { value: ' Oxfordshire', label: 'Oxfordshire' },
+            { value: ' Rutland', label: 'Rutland' },
+            { value: ' Shropshire', label: 'Shropshire' },
+            { value: ' Somerset', label: 'Somerset' },
+            { value: ' South Yorkshire', label: 'South Yorkshire' },
+            { value: ' Staffordshire', label: 'Staffordshire' },
+            { value: ' Suffolk', label: 'Suffolk' },
+            { value: ' Surrey', label: 'Surrey' },
+            // {
+            //   value: 'Tyne and Wear',
+            //   label: 'Tyne and Wear',
+            //   children: [
+            //     { value: 'Newcastle upon Tyne', label: 'Newcastle upon Tyne' },
+            //     { value: 'Gateshead', label: 'Gateshead' },
+            //     { value: 'Sunderland', label: 'Sunderland' },
+            //     { value: 'North Tyneside', label: 'North Tyneside' },
+            //     { value: 'South Tyneside', label: 'South Tyneside' }
+            //   ]
+            // },
+            { value: ' Warwickshire', label: 'Warwickshire' },
+            { value: ' West Midlands', label: 'West Midlands' },
+            { value: ' West Sussex', label: 'West Sussex' },
+            { value: ' West Yorkshire', label: 'West Yorkshire' },
+            { value: ' Wiltshire', label: 'Wiltshire' },
+            { value: ' Worcestershire', label: 'Worcestershire' }
+          ]
+        },
+        {
+          value: ' Scotland',
+          label: 'Scotland',
+          children: [
+            { value: 'Aberdeen City', label: 'Aberdeen City' },
+            { value: 'Aberdeenshire', label: 'Aberdeenshire' },
+            { value: 'Angus', label: 'Angus' },
+            { value: 'Argyll and Bute', label: 'Argyll and Bute' },
+            { value: 'Clackmannanshire', label: 'Clackmannanshire' },
+            { value: 'Dumfries and Galloway', label: 'Dumfries and Galloway' },
+            { value: 'Dundee City', label: 'Dundee City' },
+            { value: 'East Ayrshire', label: 'East Ayrshire' },
+            { value: 'East Dunbartonshire', label: 'East Dunbartonshire' },
+            { value: 'East Lothian', label: 'East Lothian' },
+            { value: 'East Renfrewshire', label: 'East Renfrewshire' },
+            { value: 'Edinburgh (City of Edinburgh)', label: 'Edinburgh (City of Edinburgh)' },
+            { value: 'Falkirk', label: 'Falkirk' },
+            { value: 'Fife', label: 'Fife' },
+            { value: 'Glasgow City', label: 'Glasgow City' },
+            { value: 'Highland', label: 'Highland' },
+            { value: 'Inverclyde', label: 'Inverclyde' },
+            { value: 'Midlothian', label: 'Midlothian' },
+            { value: 'Moray', label: 'Moray' },
+            { value: 'Na h-Eileanan Siar (Western Isles)', label: 'Na h-Eileanan Siar (Western Isles)' },
+            { value: 'North Ayrshire', label: 'North Ayrshire' },
+            { value: 'North Lanarkshire', label: 'North Lanarkshire' },
+            { value: 'Orkney Islands', label: 'Orkney Islands' },
+            { value: 'Perth and Kinross', label: 'Perth and Kinross' },
+            { value: 'Renfrewshire', label: 'Renfrewshire' },
+            { value: 'Scottish Borders', label: 'Scottish Borders' },
+            { value: 'Shetland Islands', label: 'Shetland Islands' },
+            { value: 'South Ayrshire', label: 'South Ayrshire' },
+            { value: 'South Lanarkshire', label: 'South Lanarkshire' },
+            { value: 'Stirling', label: 'Stirling' },
+            { value: 'West Dunbartonshire', label: 'West Dunbartonshire' },
+            { value: 'West Lothian', label: 'West Lothian' }
+          ]
+        },
+        {
+          value: ' Wales',
+          label: 'Wales',
+          children: [
+            { value: 'Anglesey (Isle of Anglesey)', label: 'Anglesey (Isle of Anglesey)' },
+            { value: 'Blaenau Gwent', label: 'Blaenau Gwent' },
+            { value: 'Bridgend', label: 'Bridgend' },
+            { value: 'Caerphilly', label: 'Caerphilly' },
+            { value: 'Cardiff', label: 'Cardiff' },
+            { value: 'Carmarthenshire', label: 'Carmarthenshire' },
+            { value: 'Ceredigion', label: 'Ceredigion' },
+            { value: 'Conwy', label: 'Conwy' },
+            { value: 'Denbighshire', label: 'Denbighshire' },
+            { value: 'Flintshire', label: 'Flintshire' },
+            { value: 'Gwynedd', label: 'Gwynedd' },
+            { value: 'Merthyr Tydfil', label: 'Merthyr Tydfil' },
+            { value: 'Monmouthshire', label: 'Monmouthshire' },
+            { value: 'Neath Port Talbot', label: 'Neath Port Talbot' },
+            { value: 'Newport', label: 'Newport' },
+            { value: 'Pembrokeshire', label: 'Pembrokeshire' },
+            { value: 'Powys', label: 'Powys' },
+            { value: 'Rhondda Cynon Taf', label: 'Rhondda Cynon Taf' },
+            { value: 'Swansea', label: 'Swansea' },
+            { value: 'Torfaen', label: 'Torfaen' },
+            { value: 'Vale of Glamorgan', label: 'Vale of Glamorgan' },
+            { value: 'Wrexham', label: 'Wrexham' }
+          ]
+        },
+        {
+          value: ' Northern Ireland',
+          label: 'Northern Ireland',
+          children: [
+            { value: 'Antrim', label: 'Antrim' },
+            { value: 'Armagh', label: 'Armagh' },
+            { value: 'Down', label: 'Down' },
+            { value: 'Fermanagh', label: 'Fermanagh' },
+            { value: 'Londonderry (Derry)', label: 'Londonderry (Derry)' },
+            { value: 'Tyrone', label: 'Tyrone' }
+          ]
+        },
+        {
+          value: ' Overseas',
+          label: 'Overseas',
+
+        }
+      ],
+
 
       currentText: 'Hi', // Initial text
       textOptions: ['Hi', 'Alreet', 'Howay'], // List of rotating text options
@@ -562,12 +777,75 @@ export default {
         this.currentText = this.textOptions[this.currentIndex];
       }, 2000); // Switch text every 2 seconds
     },
+
+    playAudio(){
+      this.$refs.audioPlayer.src = `http://localhost:8081/Audio/sine wave 1s.wav`;
+
+
+      // 播放音频
+      this.$refs.audioPlayer.play();
+
+
+
+
+    },
   },
 };
 </script>
 
 <style>
 
+.play-button {
+  width: 40vw; /* Width relative to the viewport width */
+  height: 20vw; /* Height relative to the viewport width */
+  max-width: 200px; /* Maximum width */
+  max-height: 100px; /* Maximum height */
+  border-radius: 20px; /* Rounded corners */
+  background-color: #00A58E; /* Button color */
+  color: white; /* Text color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3em; /* Font size relative to viewport width */
+  max-font-size: 18px;
+  cursor: pointer;
+  right: 6%; /* Position it appropriately */
+  top: 5%; /* Position it appropriately */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+  padding: 10px; /* Padding for better touch target */
+}
+
+.play-button:hover {
+  background-color: #008f78; /* Darker shade for hover */
+  transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+.play-button:active {
+  transform: translateY(1px); /* Slight press effect */
+}
+
+.play-button:focus {
+  outline: none; /* Remove outline */
+}
+
+
+
+.overlay-dialog{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.5s;
+  overflow-x: auto; /* For horizontal scrolling */
+  overflow-y: auto; /* For vertical scrolling */
+}
 
 .dialog-content{
   position: fixed;
@@ -580,7 +858,8 @@ export default {
   flex-direction: column;
   width: 90vw; /* Flexible width */
   //max-width: 600px; /* Maximum width for larger screens */
-  height: auto; /* Automatic height to fit content */
+  //height: auto; /* Automatic height to fit content */
+  max-height: 95vh;
   background: rgba(255, 255, 255, 0.95); /* Less transparent */
   color: #6ea794;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -589,7 +868,8 @@ export default {
   border-radius: 10px; /* Optional: add rounded corners */
   padding: 20px; /* Padding for inner content */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Optional: shadow for depth */
-  overflow: auto; /* Add scrolling if content exceeds height */
+  overflow-x: auto; /* For horizontal scrolling */
+  overflow-y: auto; /* For vertical scrolling */
 }
 
 
@@ -747,6 +1027,14 @@ export default {
   outline: none;
 }
 
+.button-game{
+  background-color: #008080;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+}
+
 /* When button is clicked, change color to #00a48d */
 .button-back:active, .button-next:active, .button-submit:active,
 .button-back:focus, .button-next:focus, .button-submit:focus {
@@ -805,12 +1093,13 @@ export default {
   .information-form {
     position: relative;
     margin: 0 auto;
-    top: 30%;
+    top: 50%;
+
     right: 0;
     width: 90%;
     padding: 20px;
 
-    transform: scale(1); /* Reset scaling for mobile */
+    transform: scale(1) translate(0,-50%); /* Reset scaling for mobile */
     transform-origin: center;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
@@ -822,9 +1111,24 @@ export default {
     /* Margin from the top */
     /* Margin from the left */
     width: 90vw;
-    transform: scale(0.9) translate(-5%,-10%);
+    max-height: 90vh;
+    transform: translate(-5%,-10%);
+    font-size: 1em;
+    overflow-x: auto; /* For horizontal scrolling */
+    overflow-y: auto; /* For vertical scrolling */
+  }
+
+  .custom-select-dropdown .el-select-dropdown__item {
+    transform: scale(0.4);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
-
+@media (max-width: 600px) {
+  .play-button {
+    width: 30vw; /* Wider for smaller screens */
+    height: 20vw; /* Taller for smaller screens */
+    font-size: 5.2vw; /* Larger font size for better readability */
+  }
+}
 
 </style>
