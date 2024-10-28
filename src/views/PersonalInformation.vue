@@ -191,7 +191,7 @@
 
     <div class="overlay-dialog" v-if = "dialogVisible" @click="goNextView" >
       <div class="dialog-content">
-        <h2 style="color: #333; margin-bottom: 15px;">🎮 How to Play 🎮</h2>
+        <h2 style="color: #FF832B; margin-bottom: 15px;">🎮 How to Play 🎮</h2>
         <ol>
           <li>
             Click on the '<strong>Wey Aye</strong>' button to listen to the sound clip.
