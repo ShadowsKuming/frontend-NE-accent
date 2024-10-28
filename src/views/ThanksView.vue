@@ -2,11 +2,11 @@
   <div>
     <div class="image-container">
       <img src="@/assets/thank2.png" alt="Long Image">
-      <a href="https://research.ncl.ac.uk/ne-accent-games/">https://research.ncl.ac.uk/ne-accent-games/<i class ="el-icon-arrow-right"></i></a>
+      <a href="https://research.ncl.ac.uk/ne-accent-games/" style="color: #00A58E; text-decoration: none; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;; outline: none;">https://research.ncl.ac.uk/ne-accent-games/<i class ="el-icon-arrow-right"></i></a>
     </div>
 
     <div class="thanks-view">
-      <a href="https://research.ncl.ac.uk/ne-accent-games/" >https://research.ncl.ac.uk/ne-accent-games/<i class ="el-icon-arrow-right"></i></a>
+      <a href="https://research.ncl.ac.uk/ne-accent-games/" style="color: #00A58E; text-decoration: none; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;; outline: none;">https://research.ncl.ac.uk/ne-accent-games/<i class ="el-icon-arrow-right"></i></a>
     </div>
   </div>
 
