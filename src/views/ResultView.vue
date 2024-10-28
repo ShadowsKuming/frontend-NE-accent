@@ -24,7 +24,7 @@
           <div class= "data-frame">{{accuracy}}%</div>
         </div>
       </div>
-      <button class="custom-button" @click="dialogVisible=true">Win Voucher</button>
+      <button class="custom-button2" @click="dialogVisible=true">💰<strong>Win Voucher</strong>🎁</button>
 
     </div>
 
@@ -278,7 +278,32 @@ export default {
   transition: background-color 0.3s ease;
 }
 
+.custom-button2{
 
+  //background-color: #D4C376;
+  //color: #333333;
+  background-color: #00a48d;
+  color: #e8f4f3;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 .custom-button:active,
 .custom-button:focus{
