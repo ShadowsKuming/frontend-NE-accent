@@ -8,7 +8,7 @@
 <!--      <el-button type="primary" circle plain class="audio" :disabled="audioPlaying" @click="playAudio">-->
 <!--        <i class="el-icon-video-play" style="font-size: 50px;" ></i>-->
 <!--      </el-button>-->
-      <div class="play-button" v-if="!audioPlaying" ref="playButton" @click="playAudio">
+      <div class="play-button" v-if="!audioPlaying" ref="playButton" @click="playAudio" style="text-align: center;">
         Wey Aye!
       </div>
 
@@ -45,7 +45,7 @@
 <!--      <el-button type="primary" circle plain class="audio" :disabled="audioPlaying" @click="playAudio">-->
 <!--        <i class="el-icon-video-play" style="font-size: 50px;" ></i>-->
 <!--      </el-button>-->
-      <div class="play-button" v-if="!audioPlaying" ref="playButton" @click="playAudio">
+      <div class="play-button" v-if="!audioPlaying" ref="playButton" @click="playAudio" style="text-align: center;">
         Wey Aye!
       </div>
       <audio ref="audioPlayer" ></audio>
