@@ -578,8 +578,8 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 98vw; /* Flexible width */
-  max-width: 600px; /* Maximum width for larger screens */
+  width: 90vw; /* Flexible width */
+  //max-width: 600px; /* Maximum width for larger screens */
   height: auto; /* Automatic height to fit content */
   background: rgba(255, 255, 255, 0.95); /* Less transparent */
   color: #6ea794;
@@ -805,7 +805,7 @@ export default {
   .information-form {
     position: relative;
     margin: 0 auto;
-    top: 40%;
+    top: 30%;
     right: 0;
     width: 90%;
     padding: 20px;
@@ -814,18 +814,17 @@ export default {
     transform-origin: center;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
-}
 
-  @media (max-width: 600px) {
-    .game-dialog-content {
-      width: 98vw; /* Make it wider on smaller screens */
-      font-size: 0.8rem; /* Smaller font size for mobile */
-    }
+  .dialog-content{
+
+    top: 10%;
+    left: 5%;
+    /* Margin from the top */
+    /* Margin from the left */
+    width: 90vw;
+    transform: scale(0.9) translate(-5%,-10%);
   }
-
-  @media (min-width: 601px) and (max-width: 1200px) {
-    .game-dialog-content {
-      font-size: 1.5rem; /* Medium font size for tablets */
-    }
 }
+
+
 </style>
