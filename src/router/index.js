@@ -28,7 +28,7 @@ const routes = [
     props: true
   },
   {
-    path: '/ranking/cfgkd47-a4dsasc1bab4e:questionnaire_id',
+    path: '/question/cfgkd47-a4dsasc1bab4e:questionnaire_id',
     name: 'questionnaire',
     component:() => import(/* webpackChunkName: "about" */ '../views/QuestionnaireView.vue'),
     props: true
